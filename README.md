@@ -210,3 +210,51 @@ created a file done.txt
 type echo "done with lab!"
 bash done.txt
 ```
+
+## Installing software and updates
+__Packages and package managers__:
+- Packages:
+  - Archive files
+  - For installing new software or updating existing software
+- Pacakge managers:
+  - Manage the download and installation of packages
+  - available for different linux distros
+  - can be GUI-based or command-line tools
+
+__Deb and RPM packages__:
+- Packages for linux OS
+- Distinct file types for different linux OS
+- .deb files:
+  - for debian-based distributions such as Debian, Ubuntu, and Mint
+  - deb stands for Debian
+- .rpm files:
+  - For Red Hat-based distributions such as CentOS/RHEL, Fedora and openSUSE
+  - RPM stands for Red Hat Package Manager
+- deb and RPM formats are equivalent
+- If a package is only available in onoe format, you can use alien to convert it:
+  - RPM to deb:  
+    `alien <package-name> .rpm`
+  - deb to RPM:
+    `alien -r <package-name> .deb
+
+Updating deb-based linux  
+GUI tool: __Update Manager__  
+Command line: __apt__
+
+Updating RPM-based linux  
+GUI tool: __PackageKit__  
+Command line: __yum__
+
+Installing new software  
+deb package with apt:  
+ `sudo apt install <package-name>`  
+rpm package with yum:  
+ `sudo yum install <package-name>`  
+
+Other software package managers:  
+- python package managers include pip and conda
+- Installing the pandas library:  
+  `pip install pandas`
+
+
+
