@@ -256,5 +256,177 @@ Other software package managers:
 - Installing the pandas library:  
   `pip install pandas`
 
+## Module 2 - Introduction to Linux Commands
 
+### Overview of common Linux Shell Commands
+What is a shell?  
+- user interface for running commands
+- interactive language
+- Scripting language
 
+- Default shell is usually Bash
+- other shells include sh, ksh, tcsh, zsh, and fish
+
+```
+$ printenv SHELL  ###___To know what's the default___###
+/bin/bash
+$ bash
+```
+
+__Shell command applications__:
+- getting information
+- navigating and working with files and directories
+- printing file and string contents
+- compression and archiving
+- performing network operations
+- monitoring performance and status
+- running batch jobs
+
+__Getting information__:
+- `whoami` - username
+- `id` - user ID and group ID
+- `uname` - operating system name
+- `ps` - running processes
+- `top` - resource usage
+- `df` - mounted file systems
+- `man` - reference manual
+- `date` - today's date
+
+__Working with files__:
+- `cp` - copy file
+- `mv` - change file name or path
+- `rm` - remove file
+- `touch` - create empty file, update file timestamp
+- `chmod` - change/modify file permissions
+- `wc` - get count of lines, words, characters in file
+- `grep` - return lines in file matching pattern
+
+__Navigating and working with directories__:
+- `ls` - list files and directories
+- `find` - find files and directory tree
+- `pwd` - get present working directory
+- `mkdir` - make directory
+- `cd` - change directory
+- `rmdir` - remove directory
+
+__Printing file and string contents__:
+- `cat` - print file contents
+- `more` - print file contents page-by-page
+- `head` - print first N lines of file
+- `tail` - print last N lines of file
+- `echo` - print string or variable value
+
+__Compression and archiving__:
+- `tar` - archive a set of files
+- `zip` - compress a set of files
+- `unzip` - extract files from a compressed zip archive
+
+__Networking__:
+- `hostname` - print hostname
+- `ping` - send packets to URL and print response
+- `ifconfig` - display or configure system network interfaces
+- `curl` - display contents of file at a URL
+- `wget` - download a file from URL
+
+__Running Linux on a Windows machine__:
+- Dual boot with a partition
+- Install Linux on a virtual machine
+- Use a Linux emulator
+- Windows Subsystem for Linux (WSL)
+
+### Informational Commands
+__User information__:
+- Display user information
+- verify identity or indentify user account
+- `whoami` - return user name
+- `id`(identity) - user or group ID
+- ```
+  $ whoami
+  johndoe
+  $ id -u
+  501
+  $ id -u -n
+  johndoe
+  ```
+
+__System information__:
+`uname` (Unix name) - returns OS information
+- Identify system or diagnose issues
+```
+$ uname
+Darwin
+$ uname -s -r  ###___return os name and version___###
+Darwin 20.6.0
+$ uname -v
+......more info.......
+```
+
+__Displaying your disk usage__:
+`df`(disk free) - Shows disk usage
+- Monitor disk usage or check space
+```
+$ df -h ~
+...
+$ df -h   ### for each file###
+```
+
+__Displaying current running process__:
+`ps` (process status) - Running processes
+- Monitor or manage processes
+```
+$ ps -e  ### displays any current process regardless of users ###
+...
+```
+
+__Monitoring system health and status__:
+`top` (table of processes) - Task manager
+- Monitor system performance and resource usage
+```
+$ top -n 3
+```
+
+__Printing strings and variable values__:
+`echo` - Print string variable value
+```
+$ echo  ### empty line ###
+
+$ echo Hello
+Hello
+$ echo "Learning Linux is fun!"  ### good practice to write in quotes ###
+Learning Linux is fun!
+$ echo $PATH
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
+
+__Getting date information__:
+`date` - Displays system date and time
+```
+$ date
+Mon Sep 15 00:20:57 IST 2025
+$ date "+%j day of %Y"
+258 day of 2025
+$ date "+It's %A, the %j day of %Y"
+It's Monday, the 258 day of 2025
+```
+| Specifier | Explanation |
+| --------- | ----------- |
+| `%d` | Displays the day of the month (01 to 31) |
+| `%h` | Displays the abbreviated month name (Jan to Dec) |
+| `%m` | Displays the month of the year (01 to 12) |
+| `%Y` | Displays the four-digit year |
+| `%T` | Displays the time in 24 hour format as HH:MM:SS |
+| `%H` | Displays the hour |
+
+__Viewing the manual__:
+`man` (manual) - Shows manual for any command
+```
+$ man id
+...
+```
+
+```
+### can use tldr command, why? more accessible than man ###
+npm install -g tldr
+
+tldr command_name
+```
