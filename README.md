@@ -430,3 +430,156 @@ npm install -g tldr
 
 tldr command_name
 ```
+
+### File and Directory navigation commands
+listing directory content:
+`ls`(list) - list files and directories
+```
+$ ls
+Desktop		Downloads	Movies		Pictures Documents	Library		Music		Public
+$ ls Downloads
+...contents of Downloads...
+$ ls -l
+...more information version...
+```
+`pwd` - finding current working directory  
+`cd`(change directory) - change directory  
+`find` - find files in directory tree
+ - ```
+   $ pwd
+   /Users/me/Documents
+   $ find . -name "a.txt"
+   ./folder1/a.txt
+   $ find . -iname "a.txt"
+   ./folder1/a.txt
+   ./folder2/A.txt
+   ```
+### File and Directory management commands
++ `mkdir`(make directory)  
++ `rm`(remove) - remove file or directory  
+  - `rm -r <folder-name>` - to remove a directory
+  - `rmdir <folder_name>` - if the directory is made using mkdir (recommended)  
++ `touch` - create empty file, update file date  
++ `cp`(copy) - copy file or directory to destination
+  - `cp /source/file /dest/filename` - to copy files
+  - `cp -r /source/dir /dest/dir` to copy directories  
++ `mv`(move) - move file or directory
+  - `mv /source/file /dest/dir` - for files
+  - `mv /source/dir /dest/dir` for directories  
++ `chmod`(change mode) - change file permissions
+  - ```
+    $ ls -l my_script.sh
+    -rw-r- -r- my_script.sh  ### read write permissions ###
+    $ ./my_script.sh
+    bash: permission denied ./my_script.sh
+    $ chmod +x my_script.sh
+    # ls -l
+    -rwxr-xr-x my_script.sh
+    $ ./my_script.sh
+    Learning Linux is fun!
+    ```
+
+ __BAM BAM__:
+ - `*` is a special character called wildcard. It is used to represent any string of characters
+   + `ls /bin/b*` lists all files starting with b
+   + `ls /bin/*r` lists all files ending with r
+ - common options to try with `ls` command:
+   | Option | Description |
+   | ------ | ----------- |
+   | `-a` | list all files, including hidden files |
+   | `-d` | list directories only, do not include files |
+   | `-h` | with `-l` and `-s`, print sizes like 1K, 234M, 2G |
+   | `-l` | include attributes like permissions, owner, size and last-modified date |
+   | `-s` | sort by file size, largest first |
+   | `-t` | sort by last-modified date, newest first |
+   | `r` | reverse the sort order |
+
+
+### Security: managing file permissions and ownership
+```
+$ echo 'who can read this file?' > my_new_file
+$ more my_new_file
+who can read this file?
+$ ls -l my_new_file
+-rw-r--r-- 1 theia users ...
+```
+- in `-rw-r--r--` the first `-` represents that the permissions are referring to a file, for a directory it would be `d`
+- first three characters `rw-` define users permission, next three `r--` group, and the final three `r--` other
+- `rw-` means read, write but not execute(x)
+- __for directory__:
+  | directory permission | permissible actions(s) |
+  | `r` | list directory contents using `ls` command |
+  | `w` | add or remove files or directories |
+  | `x` | enter directory using `cd` command |
+  | `s` | special permission |
+
+__Making a file private__:
+```
+chmod go-r my_new_file
+ls -l my_new_file
+-rw------- 1 theia users ...
+```
+removing for group and others, the read permission.
+
+### Viewing file content
+`cat`(catenate) - print entire file contents  
+`more` - print file contents page-by-page  
+`head` - print first N lines of file (default 10)  
+`tail` - print last N lines  
+`wc`(word count) - Count characters, word, lines
+```
+$ ls
+numbers.txt
+$ cat numbers.txt
+...100 to 1...  ### takes entire command line ###
+$ more numbers.txt
+...press [space] to change page and exit with [q]...
+$ head numbers.txt
+...0 to 9...
+$ head -n 3 numbers.txt
+... 0 to 2...
+$ cat pets.txt
+... cat cat cat cat dog dog cat...
+$ wc pets.txt
+7 7 28 pets.txt  ### 7 lines 7 words 28 characters, it counts \n as well ###
+$ wc -l pets.txt
+7 pets.txt
+$ wc -w pets.txt
+7 pets.txt
+$ wc -c pets.txt
+28 pets.txt
+```
+
+### Commands for wrangling text files
+`sort` - sort lines in a file
+`uniq`("unique") - Filter out repeated lines
+`grep`("global regular expression print") - Return lines in file matching pattern
+`cut` - Extracts a section from each line
+`paste` - Merge lines from different lines
+```
+$ sort pets.txt
+... cat cat cat cat cat dog dog ...
+$ sort -r pets.txt
+... dog dog cat cat cat cat cat ...
+$ uniq pets.txt
+... cat dog cat ...
+$ cat people.txt
+... name of people ...
+$ grep ch people.txt
+Dennis Ritchie
+Erwin Schrodinger
+$ grep -i ch people.txt  ### case insensitive ###
+Charles Babbage
+Dennis Ritchie
+Erwin Schrodinger
+$ cut -c 2-9 people.txt
+...lan Turi ...
+$ cut -d ' ' -f2 people.txt  ### delimiter ' ' and field 2 that is last names of people ###
+... Turing Stroustrup ...
+### let's say we have three files first.txt last.txt yob.txt ###
+$ paste first.txt last.txt yob.txt
+... looks like table, uses \t as the default delimitter ...
+$ paste -d "," first.txt last.txt yob.txt
+Dennis,Ritchie,1921
+```
+
